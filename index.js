@@ -20,3 +20,53 @@ let allWagesFor = function () {
 
     return payable
 }
+
+function createEmployeeRecord(array){
+    return {
+        firstName: array[0],
+        familyName: array[1],
+        title: array[2],
+        payPerHour: array[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+};
+
+function createEmployeeRecords(arrayOfArrays){
+    return arrayOfArrays.map(e=>createEmployeeRecord(e))
+};
+
+function createTimeInEvent(dateAndHours){
+    const dateOrHours = dateAndHours.split(' ')
+    let timeIn = {
+        type: "TimeIn",
+        hour: parseInt(dateOrHours[1],10),
+        date: dateOrHours[0]
+    };
+    this.timeInEvents.unshift(timeIn);
+    return this;
+}
+
+function createTimeOutEvent(dateAndHours){
+    const dateOrHours = dateAndHours.split(' ')
+    let timeOut = {
+        type: "TimeOut",
+        hour: parseInt(dateOrHours[1],10),
+        date: dateOrHours[0]
+    };
+    this.timeOutEvents.unshift(timeOut);
+    return this;
+};
+
+function hoursWorkedOnDate(date) {
+    let timeInDateObj = this.timeInEvents.find(e=>e.date===date);
+    let timeOutDateObj = this.timeOutEvents.find(e=>e.date===date);
+    let workingHour = (timeOutDateObj.hour -  timeInDateObj.hour)/100;
+    return workingHour
+};
+
+
+
+
+    
+
