@@ -33,7 +33,7 @@ function createEmployeeRecord(array){
 };
 
 function createEmployeeRecords(arrayOfArrays){
-    return arrayOfArrays.map(e=>createEmployeeRecord(e))
+    return arrayOfArrays.map(e=>createEmployeeRecord.call(this,e))
 };
 
 function createTimeInEvent(dateAndHours){
@@ -65,7 +65,14 @@ function hoursWorkedOnDate(date) {
     return workingHour
 };
 
+function wagesEarnedOnDate(date){
+    let workingHour = hoursWorkedOnDate.call(this, date);
+    return workingHour*this.payPerHour
+}
 
+function findEmployeeByFirstName(collection, firstNameString){
+    return createEmployeeRecords(collection);
+}
 
 
     
